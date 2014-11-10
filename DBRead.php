@@ -10,7 +10,7 @@
 $result = $db->query($sql);
 
 echo display_result($result);
- 
+    
  
 	//header("Content-Type:Application/json");
 	//echo "testing start" . '</br>';
