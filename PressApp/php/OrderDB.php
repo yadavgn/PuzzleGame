@@ -1,6 +1,6 @@
 <?php
 
-class userDB
+class orderDB
 {
 	private $conn ;
 	public function __construct () {
@@ -15,17 +15,17 @@ class userDB
 		return true;
 	}
 	
-	public function Getuser($id)
+	public function Getorder($userID)
 	{
 		$output = array();
 		$this->OpenConnection();
 		if( $this->isConnected() ){
 			//echo 'test connection passed';
-			$sql = "SELECT * FROM userdetails WHERE userID = $id";
-            //$sql = "SELECT * FROM userdetails ";
+			$sql = "SELECT * FROM orderdetails WHERE CustomerID = '$userID'";
+            //$sql = "SELECT * FROM orderdetails ";
 			$result = $this->conn->query($sql);
 
-			if ($result->num_rows > 0) {
+			if ( $result->num_rows > 0) {
 				
 				// output data of each row
 				while($row = $result->fetch_assoc()) {
@@ -40,28 +40,30 @@ class userDB
 		return $output;
 	}
 	
-	public function AddUser($id, $name, $lastname, $mobile, $address1, $address2, $address3, $email){
+	public function Addorder($id, $OrderDate, $PickUpDate, $userID, $pickupTime){
 		$output = array();
 
 		$this->OpenConnection();
 		if( $this->isConnected() ){
-            if($this->isUserExists($id)) {
-               return $this->UpdateUserProfile($id, $name,$lastname, $mobile, $address1, $address2, $address3, $email);
+            
+            if($this->isorderExists($id)) {
+               return $this->UpdateorderProfile($id, $OrderDate, $PickUpDate, $userID, $pickupTime);
             }else {
-              //$sql = "INSERT INTO `PressDB`.`userdetails` ( name, address1, address2, address3, email, lastname, mobile. ) 
-                $sql = "INSERT INTO `userdetails`(`name`, `address1`, `address2`, `address3`, `email`, `lastname`, `mobile`, `CreatedOn` )
-                                                VALUES ( \"$name\", \"$address1\", \"$address2\", \"$address3\", \"$email\", \"$lastname\", \"$mobile\", NOW())";
+              //$sql = "INSERT INTO `PressDB`.`orderdetails` ( name, address1, address2, address3, email, lastname, mobile. ) 
+                $sql = "INSERT INTO `orderdetail`( `CustomerID`, `OrderDate`, `PickUpDate`)
+                                                VALUES (  \"$userID\", \"$OrderDate\", \"$PickUpDate\")";
 
                 if ($this->conn->query($sql) === TRUE) {
                     $output["status"] = "Success";
-                    $output["userID"] =  $this->conn->insert_id;
+                    $output["orderID"] =  $this->conn->insert_id;
                     $output["Query"] = $sql;
+                    $output["Message"] = "Corngratulations. your order is placed Successfully";
                 } else {
                     //echo "Error: " . $sql . "<br>" . $this->conn->error;
                     $output["status"] = "Error";
                     $output["Error"] = $this->conn->error;
                     $output["Query"] = $sql;
-                    $output["Message"] = "Corngratulations " + $name + ". you are Successfully registered";
+                    $output["Message"] = "Sorry. Couldn't place the order. please try again after some time.";
                 }
             }
 			$this->conn->close();
@@ -74,12 +76,14 @@ class userDB
         return (!isset($question) || trim($question)==='');
     }
     
-    public function isUserExists($id){
+    public function isorderExists($id){
         if($this->IsNullOrEmptyString($id)) return FALSE;
-        $sql = "SELECT * FROM userdetails where userID = $id";
+        $sql = "SELECT * FROM orderdetails where ID = $id";
         $result = $this->conn->query($sql);
         //echo $id + '<br>';
         //return $result;
+        if( $result === FALSE) return FALSE;
+        
         if ($result->num_rows > 0) {  //  There is an error in query execution.
             return TRUE;
         }
@@ -87,7 +91,7 @@ class userDB
         return FALSE;
     }
     
-    public function UpdateUserProfile($id, $name, $lastname, $mobile, $address1, $address2, $address3, $email){
+    public function UpdateorderProfile($id, $OrderDate, $PickUpDate, $userID, $pickupTime){
         $output = array();
         
         if( !$this->isConnected() ){
@@ -95,20 +99,22 @@ class userDB
         }
 
 
-        //$sql = "UPDATE `userdetails` SET `name`=[$name],`address1`=[$address1],`address2`=[$address2],`address3`=[$address3],`email`=[$email],`lastname`=[$lastname],`mobile`=[$mobile] WHERE `userID`= [$id]";
-        $sql = "UPDATE `userdetails` SET `name`='$name',`address1`='$address1',`address2`='$address2',`address3`='$address3',`email`='$email',`lastname`='$lastname',`mobile`='$mobile' 'UpdatedOn'='NOW()' WHERE `userID`= '$id'";
-        //$sql = "UPDATE `userdetails` SET `name`='$name' WHERE `userID`= '$id'";
+        //$sql = "UPDATE `orderdetails` SET `name`=[$name],`address1`=[$address1],`address2`=[$address2],`address3`=[$address3],`email`=[$email],`lastname`=[$lastname],`mobile`=[$mobile] WHERE `orderID`= [$id]";
         
-        //$sql = "UPDATE `PressDB`.`userdetails` SET `name`=\"$name\", `address1`=\"$address1\", `address2`=\"$address2\", `address3`=\"$address3\", `email`=$email, `lastname`=$lastname, `mobile`= $mobile WHERE `userID`= $id ";
+        //$sql = "UPDATE `orderdetails` SET `name`='$name',`address1`='$address1',`address2`='$address2',`address3`='$address3',`email`='$email',`lastname`='$lastname',`mobile`='$mobile' 'UpdatedOn'='NOW()' WHERE `orderID`= '$id'";
+        
+        //$sql = "UPDATE `orderdetails` SET `name`='$name' WHERE `orderID`= '$id'";
+        
+        //$sql = "UPDATE `PressDB`.`orderdetails` SET `name`=\"$name\", `address1`=\"$address1\", `address2`=\"$address2\", `address3`=\"$address3\", `email`=$email, `lastname`=$lastname, `mobile`= $mobile WHERE `orderID`= $id ";
 //                                                VALUES ( \"$name\", \"$address1\", \"$address2\", \"$address3\", \"$email\", \"\", \"$mobile\")";
         if ($this->conn->query($sql) === TRUE) {
             $output["status"] = "Success";
             $output["Message"] = "Updated Successfully";
-            $output["userID"] =  $id;
+            $output["orderID"] =  $id;
         } else {
             $output["status"] = "Error";
             $output["Message"] = "Could not Update profile.";
-            $output["userID"] =  $id;
+            $output["orderID"] =  $id;
             $output["ErrorMsg"] = $this->conn->error;
             $output["sqlExe"] = $sql;
         }

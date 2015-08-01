@@ -1,8 +1,7 @@
 
 
 
-UserProfile = function(name,lname, mobile, address1, address2, address3,email)
-{
+UserProfile = function(name,lname, mobile, address1, address2, address3,email) {
     this.userID = undefined; // This field must be populated from Web server to identify user.
 	this.fname = name;
     this.lname = lname;
@@ -77,6 +76,8 @@ UserProfile.prototype.loadUserProfile = function() {
 
 // This object which contains Order Details.
 Order = function() {
+    this.userID = undefined;
+    
     this.OrderDate = new Date();
     this.PickupTimes = [ "8AM", "9AM", "10AM", "11AM", "12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM"];
     this.PickupDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -84,13 +85,33 @@ Order = function() {
     this.pickupTimeSelected = this.PickupTimes[0];
     
     this.PickUpDate = new Date();
-    
+    this.PickUpTime = "pickup Time";
+
     this.UpdatePickUpDate = function() {
-        var t = new Date();
-        //var dayofWeek = t.getDate();
-        //var dayofWeek = t.getDay();
+        var pickIndex = this.PickupDays.indexOf( this.pickupDaySelected );
+        var todayIndex = this.OrderDate.getDay();
+        var daysfromToday = pickIndex - todayIndex;
+        if(  daysfromToday < 0 ){
+            daysfromToday += 7;
+        }
+        var today = new Date();
+      
+        this.PickUpDate.setDate(today.getDate() + daysfromToday);
+        this.PickUpDate.setHours(this.PickupTimes.indexOf(this.pickupTimeSelected) + 8);
+
+
+        ///// Updated Pick Time which should be displayed on Confirmatin page.
+        var timeIndex = this.PickupTimes.indexOf(this.pickupTimeSelected);
+        
+        this.PickUpTime = this.pickupTimeSelected ;
+        if(timeIndex < this.PickupTimes.length-1) 
+            this.PickUpTime += " to "+ (this.PickupTimes[timeIndex+1] );
+        else 
+            this.PickUpTime += " to 10PM" ;
+
+        return 1;
     };
-    
+
     this.dayOfMonth = function() {
         return this.PickupDays.indexOf( this.pickupDaySelected );
     };
@@ -98,8 +119,6 @@ Order = function() {
     this.dayOfWeek = function() {
         return this.pickupDaySelected;
     };
-    this.pickupDate  = new Date();
-    this.pickupTime = " Pickup Time";
     
     this.dayOfOrderPickup = function() {
         var pickIndex = this.PickupDays.indexOf( this.pickupDaySelected );
@@ -108,20 +127,18 @@ Order = function() {
         if(  daysfromToday < 0 ){
             daysfromToday += 7;
         }
-        this.PickUpDate.setDate(this.pickupDate.getDate() + daysfromToday);
-        this.PickUpDate.setHours(this.PickupTimes.indexOf(this.pickupTimeSelected) + 9);
-        
+
+        ///// Updated Pick Time which should be displayed on Confirmatin page.
         var timeIndex = this.PickupTimes.indexOf(this.pickupTimeSelected);
         
-        this.pickupTime = this.pickupTimeSelected ;
+        this.PickUpTime = this.pickupTimeSelected ;
         if(timeIndex < this.PickupTimes.length-1) 
-            this.pickupTime += " to "+ (this.PickupTimes[timeIndex+1] );
+            this.PickUpTime += " to "+ (this.PickupTimes[timeIndex+1] );
         else 
-            this.pickupTime += " to 10PM" ;
+            this.PickUpTime += " to 10PM" ;
 
         return daysfromToday;
     };
-
 
 };
 
@@ -134,13 +151,16 @@ Order.prototype.UpdateDateTime = function(){
 
 MyApp = function($scope,$http) {
     var app = this;
-    app.myserver = "http://localhost/mywebs/TestApp/AngularPressAPp";
+    app.myserver = "http://localhost/mywebs/PuzzleGame/PressApp";
     app.OpenStartPage = function() {
         $.mobile.pageContainer.pagecontainer("change", "#start", {
             transition: "pop"
         });
     };
 
+    this.OnCancelCurrentOrder = function() {
+    	history.go(-1);
+    }; 
     
     app.saveProfile = function() {
         app.userProfile.saveUserProfile();
@@ -162,6 +182,7 @@ MyApp = function($scope,$http) {
     app.RegisterUserToServer = function() {
         var _method ="PUT";
         if(app.userProfile.userID === undefined) _method = "POST";
+        app.showLoader("Order placed Successfully.", true);
         
         console.info("userProfile is: "+ app.userProfile);
         $http({
@@ -173,6 +194,7 @@ MyApp = function($scope,$http) {
             // success
             console.info(response.data);
             var data = response.data;
+            app.showLoader(data, true);
             if(data != 'undefined' && data.status == 'Success')
             {
                 app.userProfile.userID = data.userID;
@@ -185,7 +207,9 @@ MyApp = function($scope,$http) {
         function(response) { // optional
             // failed
             console.info(response.data);
+            app.showLoader(data, true);
         });
+        
 
     };
     app.RegisterUserProfile = function() {
@@ -203,6 +227,7 @@ MyApp = function($scope,$http) {
         });
         return false;
     };
+    
     app.OpenProfilePage = function() {
         if(app.updatedProfile == undefined) 
             app.updatedProfile = new UserProfile();
@@ -214,18 +239,52 @@ MyApp = function($scope,$http) {
     };
     
     app.isAValidOrder = function(){
-        var today = new Date();
-        
-        if(app.Order.PickUpDate > today)
+        var now = new Date();
+        app.Order.UpdatePickUpDate();
+
+        if(app.Order.PickUpDate > now)
             return true;
         return false;
     };
+        
+    app.Orders = new Array();
     
     app.PlaceOrder = function() {
             if(app.isAValidOrder() ) {
 
                 app.OpenOrderConfirmatinPage();
             };
+    };
+    
+    app.OpenOrderHistoryPage = function() {
+        //app.Orders.push(new Order());
+        var data1 = JSON.stringify(app.userProfile);
+        console.log(data1);
+        $http({
+            url: app.myserver+'/php/RegisterOrder.php',
+            method: "POST",
+            params: {userID : "45"}
+        })
+        .then(function(response) {
+            // success
+            console.info(response.data);
+            var data = response.data;
+            if(data != 'undefined' && data.status == 'Success')
+            {
+                app.Orders.push(app.Order);
+                //app.Order = new Order();
+                //app.userProfile.userID = data.userID;
+                //app.saveProfile();
+            }else if( data!= 'undefined' && data.status != 'Success')
+            {
+                // something is wrong please show appropriate error message.
+            }
+        }, 
+        function(response) { // optional
+            // failed
+            console.info(response.data);
+        });
+        
     };
 
     app.OpenOrderConfirmatinPage = function() {
@@ -235,17 +294,60 @@ MyApp = function($scope,$http) {
         });
     };
     app.OnConfirmOrder = function() {
-        //TODO: send this order Details to server and on success open Confirmation page.
-        $http.get(app.server).then( function(data) {
-            console.log(data);
+        
+        app.Order.userID = app.userProfile.userID;
+        //TODO: need to register First.
+        
+        if(app.userProfile.userID == undefined){
+        
+            app.OpenProfilePage();
+            return ;
+        }
+        
+        app.showLoader('test Text', true);
+        
+        
+        console.info("userProfile is: "+ app.userProfile);
+        $http({
+            url: app.myserver+'/php/RegisterOrder.php',
+            method: "POST",
+            data: app.Order
+        })
+        .then(function(response) {
+            // success
+            console.info(response.data);
+            var data = response.data;
+            if(data != 'undefined' && data.status == 'Success')
+            {
+                app.Orders.push(app.Order);
+                app.Order = new Order();
+                //app.userProfile.userID = data.userID;
+                //app.saveProfile();
+            }else if( data!= 'undefined' && data.status != 'Success')
+            {
+                // something is wrong please show appropriate error message.
+            }
+            
+            app.showLoader("Order placed Successfully.", true);
+            
+            setTimeout(app.hideLoader, 700);
+        }, 
+        function(response) { // optional
+            // failed
+            console.info(response.data);
+            app.showLoader("Couldn't place order please try again after some time.");
+            setTimeout(app.hideLoader, 700);
         });
+        
     }
-    
+     
     app.Order = new Order();
 
     app.GetSelected = function() {
         return 0;
     };
+    
+    
     // Check if User is already registered.
     if(app.userProfile == undefined) app.userProfile = new UserProfile();
     if( app.userProfile.isRegistered() ){
@@ -253,6 +355,28 @@ MyApp = function($scope,$http) {
         app.OpenStartPage();
     }
     
+    
+    
+    
+    app.showLoader = function(msgText, withtext) {
+        var $this = $( '<button class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button>' ),
+            theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+            //msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData( "textonly" );
+            html = $this.jqmData( "html" ) || "";
+        $.mobile.loading( "show", {
+                text: msgText,
+                textVisible: true,
+                theme: theme,
+                textonly: withtext,
+                html: html
+        });
+    };
+    
+    app.hideLoader = function() {
+        $.mobile.loading( "hide" );
+    };
   }; 
 
 // This code must be after MyApp Object is defined other wise it doesn't work.

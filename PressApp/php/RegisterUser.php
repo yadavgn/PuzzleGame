@@ -33,7 +33,7 @@ switch($_SERVER['REQUEST_METHOD'])
             log($e);
         }
     break;
-	case 'POST': 
+	case 'POST': // Add new for the given ID and return user ID for the request. 
             try{
                 $postdata = file_get_contents("php://input");
                 //log($postdata); // Log this received data first.
@@ -47,7 +47,7 @@ switch($_SERVER['REQUEST_METHOD'])
                 $address2 = $request->address2;
                 $address3 = $request->address3;
                 $mobile  = $request->mobile;
-                $id = 1;  // $request->userID;
+                $id = -1;  // $request->userID;
                 //echo $postdata;
 
 
@@ -71,7 +71,7 @@ switch($_SERVER['REQUEST_METHOD'])
         }
 
 		break;
-	case 'PUT': 
+	case 'PUT':  // Update User detailes for the given ID.
 		//mysqli_connect("localhost","mywebsite","test","pressdb");
 		
         try{

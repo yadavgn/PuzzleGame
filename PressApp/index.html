@@ -2,11 +2,13 @@
 <html ng-app="mApp" >
 <head >
     <title>My Page</title>
+
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://andymatthews.net/code/jQuery-Mobile-Bootstrap-Theme/themes/Bootstrap.css">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
-        <link rel="stylesheet" href="http://andymatthews.net/code/jQuery-Mobile-Bootstrap-Theme/themes/jquery.mobile.icons.min.css" />
-        
+    
+          <link rel="stylesheet" href="css/themes/orange.css" />
+  <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -16,9 +18,10 @@
      
 </head>
 <body  ng-controller="MainController as App" >
+
     
 	<!-- Start of registration page -->
-<div data-role="page" id="registration">
+<div data-role="page" id="registration" data-theme="c">
 
 	<div data-role="header">
 		<h1>Register</h1>
@@ -42,6 +45,7 @@
 
 		<label for="emailinput">Email </label>
 		<input type="text" name="emailinput" id="emailinput" placeholder="Text input" ng-model="App.userProfile.email">
+        <input type="text" name="server" id="serveraddress" placeholder="provide server addres" ng-model="App.myserver">
         <div > {{App.userProfile.fname}}</div>
         <div > {{App.userProfile.address1}}</div>
         <input type="submit" value=Submit>
@@ -50,7 +54,7 @@
 </div><!-- /page -->
     
 <!-- Start of Wellcome page  -->
-<div data-role="page" id="start" >
+<div data-role="page" id="start" data-theme="c">
 	<div data-role="panel" id="mypanel" data-display="overlay">
 	<a ng-click="App.OpenProfilePage()" data-role='button' data-icon="star" id='openprofile'> Update Profile</a>
 	</div><!-- /panel -->
@@ -63,7 +67,7 @@
 			<ul>
 				<li><a data-icon="star" ng-click="App.OpenNewOrderPage()">New Order</a></li>
 				<li><a href="#" data-icon="grid">Order Status</a></li>
-				<li><a href="#" data-icon="gear">History</a></li>
+				<li><a href="" data-icon="gear" ng-click="App.OpenOrderHistoryPage()">History</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div>
@@ -74,7 +78,7 @@
 	</div>
 </div><!-- /page -->
 
-<div data-role="page" id="profile">
+<div data-role="page" id="profile" data-theme="c">
 	<div data-role="header" data-position="fixed">
 		<h1>Profile</h1>
 		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
@@ -96,6 +100,9 @@
 
 		<label for="emailinput">Email </label>
 		<input type="text" name="emailinput" id="emailinput" placeholder="Text input" ng-model="App.updatedProfile.email">
+        
+        <input type="text" name="server" id="serveraddress" placeholder="provide server addres" ng-model="App.myserver">
+        
         <div > {{App.error}}</div>
         <input type="submit"  value="Update Profile">
         <input type="button" ng-click="App.OpenStartPage()" value="Cancel" >
@@ -105,14 +112,14 @@
 </div><!-- /page -->
  
  <!-- new order page -->
-<div data-role="page" id="newOrder" >
+<div data-role="page" id="newOrder" data-theme="c">
 	<div data-role="header">
 		<a href="#start" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Home</a>
 		<h1>New Order</h1>
 		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
 	</div>
 	<div data-role='content'>
-        <form ng-submit="App.PlaceOrder()">
+        <!--<form ng-submit="App.PlaceOrder()"> -->
             <div class="ui-field-contain">
                 <label for="select-native-1">Pickup Day:</label>
                 <select required ng-model="App.Order.pickupDaySelected" name="select-native-1" id="select-native-1">
@@ -127,25 +134,23 @@
             </div>
             <div> {{ App.Order.dayOfMonth()}}  </div>
             <div> {{ App.Order.dayOfWeek()}}  </div>
-            <div> {{ App.Order.dayOfOrderPickup()}}  </div>
-            <div>Pickup Date: {{ App.Order.PickUpDate.getMonth()+1}}. {{ App.Order.PickUpDate.getDate()}}.{{ App.Order.PickUpDate.getFullYear()}}    </div>
-            <div> {{ App.Order.PickUpDate}}  </div>
-            <div> Pickup Time:  {{ App.Order.pickupTime}}  </div>
-            
-            <input type="submit" value="Place Order" />
-        </form>
-        <!-- <div> Pickup on <strong> {{App.Order.pickupDaySelected}}  @ {{App.Order.pickupTimeSelected}}</strong></div> -->
+
+            <a ng-click="App.PlaceOrder()" data-role='button' data-icon="lock">Place Order</a>
+     </div>
+     <div data-role='footer' data-position="fixed" >
+
+
      </div>
 </div>
 
     
-<div data-role="page" id="confirmOrder">
-	<div data-role="header">
+<div data-role="page" id="confirmOrder" data-theme="c">
+	<div data-role="header" data-position="fixed">
 		<a href="#start" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Home</a>
 		<h1>Confirm Order</h1>
 		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
 	</div>
-	<div data-role='content'>	
+	<div data-role='content' >	
 		
         <div class="ui-corner-all custom-corners">
           <div class="ui-bar ui-bar-a">
@@ -155,7 +160,7 @@
             <p>Thanks for the ordering. please corifm your order details below. Pickup will be performed on 
                 <strong> {{ App.Order.PickUpDate.getMonth()+1}}. {{ App.Order.PickUpDate.getDate()}}.{{ App.Order.PickUpDate.getFullYear()}} 
                 </strong>  between 
-                <strong>{{ App.Order.pickupTime}}
+                <strong>{{ App.Order.PickUpTime}}
                 </strong> </p>
           </div>
 
@@ -172,9 +177,38 @@
         <div>
             <p class="notice"> if any of the above details are not correct the please update them from your profile/neworder oprion and place your order again. Thank you! </p>
         </div>
+        <div id="errmsg" visible='false'>
+            Message:
+        </div>
+        
 		 <a ng-click="App.OnConfirmOrder()" data-role='button' data-icon="lock">Cofirm Order</a>
-		 <a id='confirmationFail' data-role='button' data-icon='back'   > Cancel </a> 
+		 <a ng-click="App.OnCancelCurrentOrder()" id='confirmationFail' data-role='button' data-icon='back'   > Cancel </a> 
     </div>
+</div>
+    
+<div data-role="page" id="OrderHistory" data-theam="c">
+	<div data-role="header">
+		<a href="#start" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Home</a>
+		<h1>Confirm Order</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
+	</div>
+	<div data-role='content'>	
+		
+        <div class="ui-corner-all custom-corners">
+          <div class="ui-bar ui-bar-a">
+            <h3>Order History</h3>
+          </div>
+            <div> Total Orders: {{ App.Orders.length }}</div>
+            <table >
+                <tr ng-repeat="order in App.Orders" >
+                    <td > Date: {{order.PickUpDate }}</td>
+                    <td > {{order.OrderDate }}</td>
+                </tr>
+            
+            </table>
+        </div>
+
+    </div> 
 </div>
 
 </body>

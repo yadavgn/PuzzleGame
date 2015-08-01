@@ -51,15 +51,7 @@ switch($_SERVER['REQUEST_METHOD'])
 
                 $request = json_decode($postdata);
 
-                //$name = $request->fname;
-                //$lastname = $request->lname;
-                //$email = $request->email;
-                //$address1 = $request->address1;
-                //$address2 = $request->address2;
-               // $address3 = $request->address3;
-                //$mobile  = $request->mobile;
                 $id = $request->userID;
-                //echo $postdata;
 
 
                 $var = new userDB();
