@@ -21,7 +21,7 @@ class orderDB
 		$this->OpenConnection();
 		if( $this->isConnected() ){
 			//echo 'test connection passed';
-			$sql = "SELECT * FROM orderdetails WHERE CustomerID = '$userID'";
+			$sql = "SELECT * FROM orderdetail WHERE CustomerID = '$userID'";
             //$sql = "SELECT * FROM orderdetails ";
 			$result = $this->conn->query($sql);
 
@@ -32,7 +32,7 @@ class orderDB
 					array_push($output, $row);
 				}
 			} else {
-				//echo "0 results"; return empty array.
+				// echo "0 results"; return empty array.
 			}
 		} // return empty array if not connected.
 		
@@ -50,8 +50,8 @@ class orderDB
                return $this->UpdateorderProfile($id, $OrderDate, $PickUpDate, $userID, $pickupTime);
             }else {
               //$sql = "INSERT INTO `PressDB`.`orderdetails` ( name, address1, address2, address3, email, lastname, mobile. ) 
-                $sql = "INSERT INTO `orderdetail`( `CustomerID`, `OrderDate`, `PickUpDate`)
-                                                VALUES (  \"$userID\", \"$OrderDate\", \"$PickUpDate\")";
+                $sql = "INSERT INTO `orderdetail`( `CustomerID`, `OrderDate`, `PickUpDate`, `PickupTime`)
+                                                VALUES (  \"$userID\", \"$OrderDate\", \"$PickUpDate\", \"$pickupTime\")";
 
                 if ($this->conn->query($sql) === TRUE) {
                     $output["status"] = "Success";
@@ -91,13 +91,15 @@ class orderDB
         return FALSE;
     }
     
-    public function UpdateorderProfile($id, $OrderDate, $PickUpDate, $userID, $pickupTime){
+    public function UpdateorderProfile($id, $OrderDate, $PickUpDate, $userID, $pickupTime,$status){
         $output = array();
         
         if( !$this->isConnected() ){
             $this->OpenConnection();
         }
-
+        
+        $sql = "INSERT INTO `orderdetail`( `CustomerID`, `OrderDate`, `PickUpDate`, `PickupTime`, `Status`)
+                                                VALUES (  \"$userID\", \"$OrderDate\", \"$PickUpDate\", \"$pickupTime\", \"$status\")";
 
         //$sql = "UPDATE `orderdetails` SET `name`=[$name],`address1`=[$address1],`address2`=[$address2],`address3`=[$address3],`email`=[$email],`lastname`=[$lastname],`mobile`=[$mobile] WHERE `orderID`= [$id]";
         

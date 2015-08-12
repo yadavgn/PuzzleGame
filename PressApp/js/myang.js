@@ -77,7 +77,7 @@ UserProfile.prototype.loadUserProfile = function() {
 // This object which contains Order Details.
 Order = function() {
     this.userID = undefined;
-    
+    this.Status = "New";
     this.OrderDate = new Date();
     this.PickupTimes = [ "8AM", "9AM", "10AM", "11AM", "12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM"];
     this.PickupDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -120,26 +120,6 @@ Order = function() {
         return this.pickupDaySelected;
     };
     
-    this.dayOfOrderPickup = function() {
-        var pickIndex = this.PickupDays.indexOf( this.pickupDaySelected );
-        var todayIndex = this.OrderDate.getDay();
-        var daysfromToday = pickIndex - todayIndex;
-        if(  daysfromToday < 0 ){
-            daysfromToday += 7;
-        }
-
-        ///// Updated Pick Time which should be displayed on Confirmatin page.
-        var timeIndex = this.PickupTimes.indexOf(this.pickupTimeSelected);
-        
-        this.PickUpTime = this.pickupTimeSelected ;
-        if(timeIndex < this.PickupTimes.length-1) 
-            this.PickUpTime += " to "+ (this.PickupTimes[timeIndex+1] );
-        else 
-            this.PickUpTime += " to 10PM" ;
-
-        return daysfromToday;
-    };
-
 };
 
 // slect Day as today.
@@ -186,7 +166,7 @@ MyApp = function($scope,$http) {
         
         console.info("userProfile is: "+ app.userProfile);
         $http({
-            url: app.myserver+ './php/RegisterUser.php',
+            url: './php/RegisterUser.php',
             method: _method,
             data: app.userProfile
         })
@@ -265,34 +245,12 @@ MyApp = function($scope,$http) {
     };
     
     app.OpenOrderHistoryPage = function() {
-        //app.Orders.push(new Order());
-        var data1 = JSON.stringify(app.userProfile);
-        console.log(data1);
-        $http({
-            url: app.myserver+'/php/RegisterOrder.php',
-            method: "POST",
-            params: {userID : "45"}
-        })
-        .then(function(response) {
-            // success
-            console.info(response.data);
-            var data = response.data;
-            if(data != 'undefined' && data.status == 'Success')
-            {
-                app.Orders.push(app.Order);
-                //app.Order = new Order();
-                //app.userProfile.userID = data.userID;
-                //app.saveProfile();
-            }else if( data!= 'undefined' && data.status != 'Success')
-            {
-                // something is wrong please show appropriate error message.
-            }
-        }, 
-        function(response) { // optional
-            // failed
-            console.info(response.data);
+
+        $.mobile.pageContainer.pagecontainer("change", "#OrderHistory", {
+            transition: "pop"
         });
-        
+
+    
     };
 
     app.OpenOrderConfirmatinPage = function() {
@@ -312,8 +270,8 @@ MyApp = function($scope,$http) {
             return ;
         }
         
-        //app.showLoader('test Text', true);
-        
+        var requestData = app.Order;
+        requestData.RequestType = "PlaceOrder";
         
         console.info("userProfile is: "+ app.userProfile);
         $http({
@@ -329,21 +287,20 @@ MyApp = function($scope,$http) {
             {
                 app.Orders.push(app.Order);
                 app.Order = new Order();
-                //app.userProfile.userID = data.userID;
-                //app.saveProfile();
+                
             }else if( data!= 'undefined' && data.status != 'Success')
             {
                 // something is wrong please show appropriate error message.
             }
-            
-            app.DisplayMessage("Order placed Successfully.", true, 700);
+            app.DisplayMessage(data.status +' : '+ data.Message, true, 700);
             
         }, 
         function(response) { // optional
             // failed
-            console.info(response.data);
-            app.showLoader("Couldn't place order please try again after some time.");
-            setTimeout(app.hideLoader, 700);
+            //console.info(response.data);
+            //app.showLoader("Couldn't place order please try again after some time.");
+            //setTimeout(app.hideLoader, 700);
+            app.DisplayMessage("Make sure you have active Internet connection.", true, 2000);
         });
         
     }
@@ -354,23 +311,30 @@ MyApp = function($scope,$http) {
         return 0;
     };
     
-    app.RetrievePreviousOrders = function() {
+    
+    // Check if User is already registered.
+    if(app.userProfile == undefined) app.userProfile = new UserProfile();
+    if( app.userProfile.isRegistered() ){
+        app.userProfile.loadUserProfile();
+        app.OpenStartPage();
+    }
+    
+    app.UpdateOrderHistory = function() {
         
-        if(app.userProfile == 'undefined' || app.userProfile.userID =='undefined'){
+        if(app.userProfile == undefined || app.userProfile.userID == undefined ){
             //user is not registered yet.
             return; 
         }
         
-        app.showLoader('Retriveing Previous orders.', true);
-        var data = "";
-        data.userID = app.updatedProfile.userID;
+        var data =new Object();
+        data.userID = app.userProfile.userID;
         data.RequestType = "Get_Records";
         
-        console.info("userProfile is: "+ app.userProfile);
+        
         $http({
             url: app.myserver+'/php/RegisterOrder.php',
             method: "POST",
-            data: app.userProfile
+            data: data
         })
         .then(function(response) {
             // success
@@ -378,43 +342,40 @@ MyApp = function($scope,$http) {
             var data = response.data;
             if(data != 'undefined' && data.status == 'Success')
             {
-                console.info(data);
-                app.Orders.push(app.Order);
+                var result = data.result;
+                for(var i=0; i< result.length; i++)
+                {
+                	var or = new Order();
+                	or.PickUpDate = result[i].PickupDate;
+                    or.PickUpTime = result[i].PickupTime; 
+                    or.Status = result[i].Status;
+                    
+                    app.Orders.push(or);
+                }
+                
                 app.Order = new Order();
                 //app.userProfile.userID = data.userID;
                 //app.saveProfile();
-            } else if( data!= 'undefined' && data.status != 'Success')
+            }else if( data!= 'undefined' && data.status != 'Success')
             {
                 // something is wrong please show appropriate error message.
             }
             
-            app.DisplayMessage("Order placed Successfully.", true, 700);
+            //app.DisplayMessage("Order placed Successfully.", true, 700);
             
         }, 
         function(response) { // optional
             // failed
             console.info(response.data);
-            app.showLoader("Couldn't place order please try again after some time.");
-            setTimeout(app.hideLoader, 700);
+            //app.showLoader("Couldn't place order please try again after some time.");
+            //setTimeout(app.hideLoader, 700);
         });
     };
     
-    // Check if User is already registered.
-    if(app.userProfile == undefined) app.userProfile = new UserProfile();
-    if( app.userProfile.isRegistered() ){
-        app.userProfile.loadUserProfile();
-        app.OpenStartPage();
-        
-        app.RetrievePreviousOrders();
-    }else{
-        
-    }
-    
-    
-    
+    app.UpdateOrderHistory();
     
     app.showLoader = function(msgText, withtext) {
-        var $this = $( '<button class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button>' ),
+        var $this = $( '<div class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</div>' ),
             theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
             //msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
             textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
@@ -429,10 +390,6 @@ MyApp = function($scope,$http) {
         });
     };
     
-    app.hideLoader = function() {
-        $.mobile.loading( "hide" );
-    };
-    
 	app.DisplayMessage = function (msg, withtext, duration){
 
 		app.showLoader(msg, withtext); 
@@ -443,7 +400,9 @@ MyApp = function($scope,$http) {
 	};
 
 
-
+    app.hideLoader = function() {
+        $.mobile.loading( "hide" );
+    };
   }; 
 
 // This code must be after MyApp Object is defined other wise it doesn't work.
