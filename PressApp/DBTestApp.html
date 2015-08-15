@@ -13,47 +13,19 @@
     <script src="./js/jquery-1.8.2.min.js"></script>
     <script src="./js/jquery.mobile-1.4.5.min.js"></script>
     <script src="./js/angular.min.js"></script>
+    
+    <script src="js/UserProfile.js" ></script>
     <script src="./js/dbtest.js"></script>
     <link rel="stylesheet" href="./css/myang.css"
      
 </head>
 <body  ng-controller="MainController as App" >
-    
-	<!-- Start of registration page -->
-<div data-role="page" id="registration" data-theme="c">
 
-	<div data-role="header">
-		<h1>Register</h1>
-		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
-	</div>
-    
-	<div data-role='content' >
-        <form ng-submit="App.RegisterUserProfile()" ng-model="App.userProfile">
-            <label for="textinput-1">Name*</label>
-            <input type="text" required placeholder="Text input"  ng-model="App.userProfile.fname">
-            <input type="text" placeholder="Last name" value="" ng-model="App.userProfile.lname">
-            <label  for="textinput-5">Mobile*</label>
-            <input required type="text" name="textinput-5" id="mobileinput" placeholder="Text input" ng-model="App.userProfile.mobile" >
-
-            <label for="textinput-2">Address Line 1*</label>
-            <input required type="text" name="textinput-2" id="addressinput-1" placeholder="Text input" ng-model="App.userProfile.address1">
-            <label for="textinput-3">Address Line 2</label>
-            <input type="text" name="textinput-3" id="addressinput-2" placeholder="Text input" ng-model="App.userProfile.address2">
-            <label for="textinput-4">Address Line 3</label>
-            <input type="text" name="textinput-4" id="addressinput-3" placeholder="Text input" ng-model="App.userProfile.address3">
-
-            <label for="emailinput">Email </label>
-            <input type="text" name="emailinput" id="emailinput" placeholder="Text input" ng-model="App.userProfile.email">
-            <input type="text" name="server" id="serveraddress" placeholder="provide server addres" ng-model="App.myserver">
-            <input type="submit" value=Submit>
-       </form>
-    </div>
-</div><!-- /page -->
     
 <!-- Start of Wellcome page  -->
 <div data-role="page" id="start" data-theme="c">
 	<div data-role="panel" id="mypanel" data-display="overlay">
-	<a ng-click="App.OpenProfilePage()" data-role='button' data-icon="star" id='openprofile'> Update Profile</a>
+	<a href="#registration" data-role='button' data-icon="star" id='openprofile'> Update Profile</a>
 	</div><!-- /panel -->
 
 	<div data-role="header" id="wellcomescrn">
@@ -74,6 +46,47 @@
 		<p class="notice" align='center' > this application is an initial effort to provide on time service with intended quality. with this app you can easly place and schedule an order as per your conveniance. </a>  
 	</div>
 </div><!-- /page -->
+
+    
+    
+	<!-- Start of registration page -->
+<div data-role="page" id="registration" data-theme="c">
+
+	<div data-role="header">
+		<h1>Register</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
+	</div>
+    
+	<div data-role='content' >
+        <form ng-submit="App.RegisterUserProfile()" ng-model="App.userProfile">
+            <label for="textinput-1">user ID</label>
+            <input type="text" required placeholder="Text input"  ng-model="App.userProfile.userID">
+            
+            <label for="textinput-1">Name*</label>
+            <input type="text" required placeholder="Text input"  ng-model="App.userProfile.fname">
+            <input type="text" placeholder="Last name" value="" ng-model="App.userProfile.lname">
+            <label  for="textinput-5">Mobile*</label>
+            <input required type="text" name="textinput-5" id="mobileinput" placeholder="Text input" ng-model="App.userProfile.mobile" >
+
+            <label for="textinput-2">Address Line 1*</label>
+            <input required type="text" name="textinput-2" id="addressinput-1" placeholder="Text input" ng-model="App.userProfile.address1">
+            <label for="textinput-3">Address Line 2</label>
+            <input type="text" name="textinput-3" id="addressinput-2" placeholder="Text input" ng-model="App.userProfile.address2">
+            <label for="textinput-4">Address Line 3</label>
+            <input type="text" name="textinput-4" id="addressinput-3" placeholder="Text input" ng-model="App.userProfile.address3">
+
+            <label for="emailinput">Email </label>
+            <input type="text" name="emailinput" id="emailinput" placeholder="Text input" ng-model="App.userProfile.email">
+            <input type="text" name="server" id="serveraddress" placeholder="provide server addres" ng-model="App.myserver">
+            
+            <a ng-click="App.RegisterUser()" data-role='button' data-icon="lock">Register User</a>
+            <a ng-click="App.UpdateUser()" data-role='button' data-icon="lock">Update User</a>
+            
+            <div > Response from server: {{ App.response }}</div>
+       </form>
+    </div>
+</div><!-- /page -->
+    
 
 <div data-role="page" id="profile" data-theme="c">
 	<div data-role="header" data-position="fixed">

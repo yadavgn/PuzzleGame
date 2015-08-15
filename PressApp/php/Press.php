@@ -1,5 +1,7 @@
 <?php
 include_once("orderDB.php");
+include_once("OrderManager.php");
+
 
 	$response = "";
 	$data = "";
@@ -30,9 +32,18 @@ switch($_SERVER['REQUEST_METHOD'])
                      
                 } else if( $requestType == "GetOrders" ){
                      
-                } else if( $requestType == "UpdateOrder" ){
+                } else if( $requestType == "RegisterUserProfile" ){
+                    $orderManager = new OrderManager(); 
+                    $orderManager->GetOrdersForUser();
+                    
+                    
+                    $output["status"] = "Success";
+                    $output["Message"] = "Received request successfully";
+                    
+                    echo json_encode($output);
+                    return;
                      
-                } else if( $requestType == "UpdateOrder" ){
+                } else if( $requestType == "UpdateUserProfile" ){
                     
                 }
                 

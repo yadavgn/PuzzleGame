@@ -1,0 +1,136 @@
+<!doctype html>
+<html ng-app="mApp" >
+<head >
+    <title>My Page</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="css/themes/orange.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    
+    <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+    <script src="./js/jquery-1.8.2.min.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/myang.js"></script>
+    <link rel="stylesheet" href="./css/myang.css"
+     
+</head>
+<body  ng-controller="MainController as App" >
+    
+	<!-- Start of registration page -->
+<div data-role="page" id="registration" data-theme="{{App.currtheme}}">
+
+    
+	<div data-role="header">
+		<h1>Page Title</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Delete</a>
+	</div>
+    
+	<div data-role='content' >
+        <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend > Select your theam.</legend>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" ng-model="App.currtheme" value="a" >
+            <label for="radio-choice-h-2a">Silver White</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" ng-model="App.currtheme" value="b" >
+            <label for="radio-choice-h-2b">Dark</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" ng-model="App.currtheme" value="c" checked>
+            <label for="radio-choice-h-2c">Vortel</label>
+        </fieldset>
+        
+        
+
+        <div class="ui-corner-all custom-corners">
+          <div class="ui-bar ">
+            <h3>Dummy Controls below.</h3>
+          </div>
+          <div class="ui-body ">
+            <label for="text-basic">Text input:</label>
+            <input type="text" name="text-basic" id="text-basic" value="">
+            
+            <input type="button" data-icon="grid" data-iconshadow="true" value="Button">
+            
+            <div data-role="collapsible" data-collapsed="false">
+                <h4>Heading</h4>
+                <ul data-role="listview">
+                    <li><a href="#">List item 1</a></li>
+                    <li><a href="#">List item 2</a></li>
+                    <li><a href="#">List item 3</a></li>
+                </ul>
+            </div>
+
+            <label for="slider">Slider:</label>
+            <input type="range" name="slider" id="slider" value="50" min="0" max="100">
+              
+            
+            
+            <form>
+            <label for="flip-checkbox">Flip toggle switch checkbox:</label>
+                <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" data-on-text="Light" data-off-text="Dark" data-wrapper-class="custom-label-flipswitch">
+            </form>
+              
+              
+            <fieldset data-role="controlgroup">
+                <legend>Checkboxes, vertical controlgroup:</legend>
+                <input type="checkbox" name="checkbox-1a" id="checkbox-1a" checked="">
+                <label for="checkbox-1a">Cheetos</label>
+                <input type="checkbox" name="checkbox-2a" id="checkbox-2a">
+                <label for="checkbox-2a">Doritos</label>
+                <input type="checkbox" name="checkbox-3a" id="checkbox-3a">
+                <label for="checkbox-3a">Fritos</label>
+                <input type="checkbox" name="checkbox-4a" id="checkbox-4a">
+                <label for="checkbox-4a">Sun Chips</label>
+            </fieldset>
+              
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <legend>Checkboxes, mini, horizontal controlgroup:</legend>
+                <input type="checkbox" name="checkbox-6" id="checkbox-6">
+                <label for="checkbox-6">b</label>
+                <input type="checkbox" name="checkbox-7" id="checkbox-7" checked="">
+                <label for="checkbox-7"><em>i</em></label>
+                <input type="checkbox" name="checkbox-8" id="checkbox-8">
+                <label for="checkbox-8">u</label>
+            </fieldset>
+              
+            <fieldset data-role="controlgroup">
+                <legend>Radio buttons, vertical controlgroup:</legend>
+                    <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
+                    <label for="radio-choice-1">Cat</label>
+                    <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
+                    <label for="radio-choice-2">Dog</label>
+                    <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
+                    <label for="radio-choice-3">Hamster</label>
+                    <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4">
+                    <label for="radio-choice-4">Lizard</label>
+            </fieldset>
+              
+            <form class="ui-filterable">
+                <input placeholder="Enter value to filter" id="filterBasic-input" data-type="search">
+            </form>
+            <ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
+                <li> Acura</li>
+                <li>Audi</li>
+                <li>BMW</li>
+                <li>Cadillac</li>
+                <li>Ferrari</li>
+            </ul>
+              
+              
+              
+              
+        </div>
+        </div>
+        
+        
+        
+    <div> Current Theme-> {{App.themes}} </div>
+    <div> Current Theme-> {{App.currtheme}} </div>
+   
+	</div>
+</div><!-- /page -->
+    
+
+
+</body>
+</html>
