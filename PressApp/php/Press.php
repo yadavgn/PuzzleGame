@@ -35,7 +35,7 @@ switch($_SERVER['REQUEST_METHOD'])
                 } else if( $requestType == "RegisterUserProfile" ) {
                     $orderManager = new OrderManager(); 
                     
-                    $output["result"] = $orderManager->RegisterUser( $request );
+                    $output = $orderManager->RegisterUser( $request );
                     
                     /*
                     if(isset($request->UserID) ) {

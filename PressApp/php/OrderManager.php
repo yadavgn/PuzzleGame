@@ -25,6 +25,7 @@ class OrderManager {
             
             $var = new userDB();
             $result = $var->AddUser($this->UserID, $this->FirstName,$this->LastName, $this->Phone, $this->Add1, $this->Add2, $this->Add3, $this->Email);
+            
             return $result;
         }
         
@@ -34,7 +35,7 @@ class OrderManager {
     
     function ReadFirstName($request){
         if( isset( $request->fname ) ) {
-            $FirstName = $request->fname;
+            $this->FirstName = $request->fname;
             //return TRUE;
         }else {
             $this->result["status"] = "Fail";
@@ -43,10 +44,10 @@ class OrderManager {
         }
         
         if( isset( $request->lname ) ) {
-            $LastName = $request->lname;
+            $this->LastName = $request->lname;
             //return TRUE;
         } else {
-            $LastName = "";
+            $this->LastName = "";
             //$result["status"] = "Fail";
             //$result["message"] = "Please provide User name";
             //return FALSE;
@@ -58,7 +59,7 @@ class OrderManager {
     function ReadAddress($request){
         
         if( isset( $request->address1 ) ) {
-            $Add1 = $request->address1;
+            $this->Add1 = $request->address1;
             //return TRUE;
         }else {
             $this->result["status"] = "Fail";
@@ -67,17 +68,17 @@ class OrderManager {
         }
         
         if( isset( $request->address2 ) ) {
-            $Add2 = $request->address2;
+            $this->Add2 = $request->address2;
             //return TRUE;
         }else {
-            $Add2 = null;
+            $this->Add2 = null;
         }
         
-        if( isset( $request->Address3 ) ) {
-            $Add3 = $request->Address3;
+        if( isset( $request->address3 ) ) {
+            $this->Add3 = $request->address3;
             //return TRUE;
         }else {
-            $Add3 = null;
+            $this->Add3 = null;
         }
         
         return TRUE;
@@ -85,7 +86,7 @@ class OrderManager {
     
     function ReadMobileNumber($request){
         if( isset( $request->mobile ) ) {
-            $Phone = $request->mobile;
+            $this->Phone = $request->mobile;
             //return TRUE;
         }else {
             $this->result["status"] = "Fail";
@@ -97,11 +98,11 @@ class OrderManager {
     }
     
     function ReadEmail($request){
-        if( isset( $request->Email ) ) {
-            $Email = $request->Email;
+        if( isset( $request->email ) ) {
+            $this->Email = $request->email;
             //return TRUE;
         }else {
-            $Email = null;
+            $this->Email = null;
         }
         
         return TRUE;
