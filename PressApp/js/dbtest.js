@@ -23,7 +23,7 @@ MyApp = function($scope,$http) {
         //app.showLoader("Registring request", true);
         var data = app.userProfile;
         data.RequestType = "RegisterUserProfile";
-        
+        data.UserID = app.userProfile.userID;
         
         $http({
             url: './php/Press.php',

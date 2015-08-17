@@ -32,13 +32,21 @@ switch($_SERVER['REQUEST_METHOD'])
                      
                 } else if( $requestType == "GetOrders" ){
                      
-                } else if( $requestType == "RegisterUserProfile" ){
+                } else if( $requestType == "RegisterUserProfile" ) {
                     $orderManager = new OrderManager(); 
-                    $orderManager->GetOrdersForUser();
                     
+                    $output["result"] = $orderManager->RegisterUser( $request );
                     
-                    $output["status"] = "Success";
-                    $output["Message"] = "Received request successfully";
+                    /*
+                    if(isset($request->UserID) ) {
+                        
+                        
+                        $output["status"] = "Success";
+                        $output["Message"] = "Received request successfully";
+                    } else {
+                        $output["status"] = "Fail";
+                        $output["Message"] = "UserID Not found in Request.";
+                    }*/
                     
                     echo json_encode($output);
                     return;
@@ -46,7 +54,7 @@ switch($_SERVER['REQUEST_METHOD'])
                 } else if( $requestType == "UpdateUserProfile" ){
                     
                 }
-                
+                /*
                 if(isset($request->userID)) {
  
                     $userID = $request->userID;
@@ -95,7 +103,7 @@ switch($_SERVER['REQUEST_METHOD'])
                         $output["Errorss"] = $result;
                         $output["Message"] = "Sorry "+ $id +", !! Ragistration Failed. Please try some time later";
                     }
-                }
+                }*/
             }
         catch(Exception $e){
             $output["status"] = "Error";
