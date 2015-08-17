@@ -31,6 +31,36 @@ class OrderManager {
         
         return $this->result;
     }
+    function UpdateUserProfile ( $request ) {
+        
+        if( $this->ReadUserID($request) &&
+            $this->ReadFirstName($request) &&
+            $this->ReadMobileNumber($request) &&
+            $this->ReadAddress($request) &&
+            $this->ReadEmail($request) 
+          ) {
+            
+            $db = new userDB();
+            $result = $db->UpdateUserProfile($this->UserID, $this->FirstName,$this->LastName, $this->Phone, $this->Add1, $this->Add2, $this->Add3, $this->Email);
+            //$db->UpdateUserProfile($id, $name, $lastname, $mobile, $address1, $address2, $address3, $email)
+            return $result;
+        }
+        
+        return $this->result;
+    }
+    
+    function ReadUserID($request){
+        if( isset( $request->userID ) ) {
+            $this->UserID = $request->userID;
+            //return TRUE;
+        }else {
+            $this->result["status"] = "Fail";
+            $this->result["message"] = "Invalid User: You need to register first.";
+            return FALSE;
+        }
+        
+        return TRUE;
+    }
     
     
     function ReadFirstName($request){

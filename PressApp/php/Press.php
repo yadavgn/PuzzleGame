@@ -52,7 +52,10 @@ switch($_SERVER['REQUEST_METHOD'])
                     return;
                      
                 } else if( $requestType == "UpdateUserProfile" ){
+                    $orderManager = new OrderManager(); 
                     
+                    $output = $orderManager->UpdateUserProfile( $request );
+                    echo json_encode($output);
                 }
                 /*
                 if(isset($request->userID)) {

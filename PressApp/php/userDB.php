@@ -9,7 +9,9 @@ class userDB
 
 	public function isConnected()
 	{
-		if( $this->conn->connect_error ){
+        //if( isset($this->conn) ) return false;
+        
+		if( isset($this->conn) && $this->conn->connect_error ){
 			return false;
 		}
 		return true;
@@ -56,12 +58,13 @@ class userDB
                     $output["status"] = "Success";
                     $output["userID"] =  $this->conn->insert_id;
                     $output["Query"] = $sql;
+                    $output["message"] = "You are Registered Successfully.";
                 } else {
                     //echo "Error: " . $sql . "<br>" . $this->conn->error;
                     $output["status"] = "Error";
                     $output["Error"] = $this->conn->error;
                     $output["Query"] = $sql;
-                    $output["Message"] = "Corngratulations " + $name + ". you are Successfully registered";
+                    $output["message"] = "Corngratulations " + $name + ". you are Successfully registered";
                 }
             }
 			$this->conn->close();
@@ -89,30 +92,36 @@ class userDB
     
     public function UpdateUserProfile($id, $name, $lastname, $mobile, $address1, $address2, $address3, $email){
         $output = array();
-        
-        if( !$this->isConnected() ){
+        $this->OpenConnection();
+        if( $this->isConnected() == false){
             $this->OpenConnection();
         }
 
+        if($this->isUserExists($id)) {
+            
 
-        //$sql = "UPDATE `userdetails` SET `name`=[$name],`address1`=[$address1],`address2`=[$address2],`address3`=[$address3],`email`=[$email],`lastname`=[$lastname],`mobile`=[$mobile] WHERE `userID`= [$id]";
-        $sql = "UPDATE `userdetails` SET `name`='$name',`address1`='$address1',`address2`='$address2',`address3`='$address3',`email`='$email',`lastname`='$lastname',`mobile`='$mobile' 'UpdatedOn'='NOW()' WHERE `userID`= '$id'";
-        //$sql = "UPDATE `userdetails` SET `name`='$name' WHERE `userID`= '$id'";
-        
-        //$sql = "UPDATE `PressDB`.`userdetails` SET `name`=\"$name\", `address1`=\"$address1\", `address2`=\"$address2\", `address3`=\"$address3\", `email`=$email, `lastname`=$lastname, `mobile`= $mobile WHERE `userID`= $id ";
-//                                                VALUES ( \"$name\", \"$address1\", \"$address2\", \"$address3\", \"$email\", \"\", \"$mobile\")";
-        if ($this->conn->query($sql) === TRUE) {
-            $output["status"] = "Success";
-            $output["Message"] = "Updated Successfully";
-            $output["userID"] =  $id;
-        } else {
+            //$sql = "UPDATE `userdetails` SET `name`=[$name],`address1`=[$address1],`address2`=[$address2],`address3`=[$address3],`email`=[$email],`lastname`=[$lastname],`mobile`=[$mobile] WHERE `userID`= [$id]";
+            $sql = "UPDATE `userdetails` SET `name`='$name',`address1`='$address1',`address2`='$address2',`address3`='$address3',`email`='$email',`lastname`='$lastname',`mobile`='$mobile' 'UpdatedOn'='NOW()' WHERE `userID`= '$id'";
+            //$sql = "UPDATE `userdetails` SET `name`='$name' WHERE `userID`= '$id'";
+
+            //$sql = "UPDATE `PressDB`.`userdetails` SET `name`=\"$name\", `address1`=\"$address1\", `address2`=\"$address2\", `address3`=\"$address3\", `email`=$email, `lastname`=$lastname, `mobile`= $mobile WHERE `userID`= $id ";
+    //                                                VALUES ( \"$name\", \"$address1\", \"$address2\", \"$address3\", \"$email\", \"\", \"$mobile\")";
+            if ($this->conn->query($sql) === TRUE) {
+                $output["status"] = "Success";
+                $output["message"] = "Updated Successfully";
+                $output["userID"] =  $id;
+            } else {
+                $output["status"] = "Error";
+                $output["message"] = "Could not Update profile.";
+                $output["userID"] =  $id;
+                $output["errorMsg"] = $this->conn->error;
+                $output["sqlExe"] = $sql;
+            } 
+        }else {
             $output["status"] = "Error";
-            $output["Message"] = "Could not Update profile.";
             $output["userID"] =  $id;
-            $output["ErrorMsg"] = $this->conn->error;
-            $output["sqlExe"] = $sql;
+            $output["message"] = "Use Does not exists.";
         }
-
         return $output;
         
     }

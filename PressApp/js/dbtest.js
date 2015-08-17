@@ -41,12 +41,13 @@ MyApp = function($scope,$http) {
             	
                 app.userProfile.userID = data.userID;
                 //app.saveProfile();
-                app.DisplayMessage(data.Message, true,1000);
+                app.DisplayMessage(data.message, true,1000);
 
                 
             }else if( data!= 'undefined' && data.status != 'Success')
             {
-            	app.DisplayMessage("Somthing is wrong. Please try again later", true, 500); 
+
+            	app.DisplayMessage(data.message, true, 1000); 
                 // something is wrong please show appropriate error message.
             }
         }, 
@@ -59,7 +60,48 @@ MyApp = function($scope,$http) {
     };
     
     
+    
     app.UpdateUser = function() {
+    
+        var _method ="PUT";
+        _method = "POST";
+        //app.showLoader("Registring request", true);
+        var data = app.userProfile;
+        data.RequestType = "UpdateUserProfile";
+        data.UserID = app.userProfile.userID;
+        
+        $http({
+            url: './php/Press.php',
+            method: _method,
+            data: data
+        })
+        .then(function(response) {
+            app.response = response;
+            // success
+            console.info(response.data);
+            var data = response.data;
+            //app.showLoader(data, true);
+            if(data != 'undefined' && data.status == 'Success')
+            {
+            	
+                app.userProfile.userID = data.userID;
+                //app.saveProfile();
+                app.DisplayMessage(data.message, true,1000);
+
+                
+            }else if( data!= 'undefined' && data.status != 'Success')
+            {
+            	
+            	app.DisplayMessage(data.message, true, 1000); 
+                // something is wrong please show appropriate error message.
+            }
+        }, 
+        function(response) { // optional
+            // failed
+            console.info(response.data);
+            app.DisplayMessage(data, true, 500); 
+        });
+        
         
     };
     
