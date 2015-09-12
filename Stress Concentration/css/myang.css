@@ -25,7 +25,13 @@
     border-color: aquamarine;
 }
 
-
+/*==========================================================================*/
+/* below code is to have text box within same line with unit selector */ 
+.controlgroup-textinput{
+    padding-top:.22em;
+    padding-bottom:.22em;
+}
+/* above code is to have text bos within same line with unit selector */ 
 
 
 /* A bit custom styling */
@@ -166,3 +172,34 @@
 }
 
 /* For this demo we used images with a size of 310x310 pixels. Just before the second breakpoint the images reach their max width: 1019px - 2 x 9px padding = 1001px x 30.9333% = ~310px */
+
+
+
+/*******************************************************************/
+
+
+.animate-repeat {
+  line-height:40px;
+  list-style:none;
+  box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  transition:all linear 1s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height:40px;
+}

@@ -1,0 +1,679 @@
+<!doctype html>
+<html ng-app="mApp" >
+<head >
+    <title>My Page</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="css/themes/orange.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    
+    <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+    <script src="./js/jquery-1.8.2.min.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/myang.js"></script>
+    <link rel="stylesheet" href="./css/myang.css" />
+     
+</head>
+<body  ng-controller="MainController as App" >
+  
+<div data-role="page"  id="registration" data-theme="{{App.currtheme}}">
+
+    
+	<div data-role="header">
+		<h1>Page Title</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Delete</a>
+	</div>
+    
+	<div data-role='content' >
+        <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend > Select your theam.</legend>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" ng-model="App.currtheme" value="a" >
+            <label for="radio-choice-h-2a">Silver White</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" ng-model="App.currtheme" value="b" >
+            <label for="radio-choice-h-2b">Dark</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" ng-model="App.currtheme" value="c" checked>
+            <label for="radio-choice-h-2c">Vorteil-1</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2d" ng-model="App.currtheme" value="d" >
+            <label for="radio-choice-h-2d">Vorteil-2</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2e" ng-model="App.currtheme" value="e" >
+            <label for="radio-choice-h-2e">Vorteil-3</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2f" ng-model="App.currtheme" value="f" >
+            <label for="radio-choice-h-2f">Pink</label>
+        </fieldset>
+        
+        
+
+        <div class="ui-corner-all custom-corners">
+          <div class="ui-bar ">
+            <h3>Dummy Controls below.</h3>
+          </div>
+
+            <div data-role="collapsibleset" data-theme="a" data-content-theme="b">
+                <div data-role="collapsible">
+                    <h2>Notches</h2>
+                    <ul data-role="listview" data-filter="true" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">Single U Notch (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Single U Notch (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Two U Notch (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Two U Notch (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Two U Notch (Out of plane Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">V Notch (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Multiple U Notch (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                    </ul>
+                </div>
+                
+                <div data-role="collapsible">
+                    <h2>Fillets</h2>
+                    <ul data-role="listview" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">Square Shoulder Fillet (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Square Shoulder Fillet (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="my-page" >
+                    <h1 > Holes</h1>
+                    <ul data-theme="b" data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                        <li class="ui-li-has-thumb ui-first-child">
+                            <a href="./uuuu" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+
+                                <img src="./imges/Img.png" class="ui-li-thumb">
+                                <h2>iOS 6.1</h2>
+                                <p>Apple released iOS 6.1</p>
+                                <p class="ui-li-aside">iOS</p>
+
+                            </a>
+
+                        </li>
+                    
+                    </ul>
+                </div>
+                
+                
+                <div class="my-page" data-role="collapsible" data-transition="slidedown" >
+                    <h1 > Holes</h1>
+                    <ul data-theme="b" data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                        <li class="ui-li-has-thumb ui-first-child"><a href="./uuuu" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Central Hole (Tension)</h2>
+                            <p>Central Hole (Tension)</p>
+                            <p class="ui-li-aside nw">not Working</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Central Hole (Bending)</h2>
+                            <p>Central Hole (Bending)</p>
+                            
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Out of plane Bending</h2>
+                            <p>Central Hole (Out of plane Bending)</p>
+                            
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Off Centre Hole (Tension)</h2>
+                            <p>Off Centre Hole (Tension)</p>
+                            <p class="ui-li-aside">not working</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Off Centre Hole (Bending)</h2>
+                            <p>Off Centre Hole (Bending)</p>
+                            <p class="ui-li-aside">Android</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Rectangular Hole (Tension)</h2>
+                            <p>Rectangular Hole (Tension)</p>
+                            <p class="ui-li-aside">not working</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Parallel Tension</h2>
+                            <p>Infinite Row of Holes (Parallel Tension)</p>
+                        </a></li>
+                        <li class="ui-last-child"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Normal Tension</h2>
+                            <p>Infinite Row of Holes (Normal Tension)</p>
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div data-role="collapsible">
+                    <h2>Shafts</h2>
+                    <ul data-role="listview" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">U Notch Circular Shaft (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">U Notch Circular Shaft (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">U Notch Circular Shaft (Torsion)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Stepped Circular Shaft (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Stepped Circular Shaft (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Stepped Circular Shaft (Torsion)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Radial Hole Circular Shaft (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="#BandingShaft">
+                            
+                            <img src="./imges/TestImg.PNG">
+                            <h3>Radial Hole Circular Shaft (Bending)</h3>
+                            <p>Calculate stress concentration factor in the shoulder of a circular section of shaft subjected to bending loads.</p>
+                            <p class="ui-li-aside"><strong>Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Radial Hole Circular Shaft (Torsion)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                    </ul>
+                </div>
+                
+                <div data-role="collapsible">
+                    <h2>Formatted text</h2>
+                    <ul data-role="listview" data-theme="a" data-divider-theme="b">
+                        <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+                        <li><a href="index.html">
+                            <h3>Stephen Weber</h3>
+                            <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                            <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+                            </a></li>
+                        <li><a href="index.html">
+                            <h3>jQuery Team</h3>
+                            <p><strong>Boston Conference Planning</strong></p>
+                            <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                            <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div data-role="collapsible" data-transition="slidedown">
+                    <h2>Thumbnails and split button</h2>
+                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a">
+                        <li><a href="index.html">
+                                <img src="../_assets/img/album-bb.jpg">
+                                <h3>Broken Bells</h3>
+                                <p>Broken Bells</p>
+                            </a>
+                            <a href="index.html" data-rel="dialog" data-transition="slideup">Purchase album </a>
+                        </li>
+                        <li><a href="index.html">
+                            <img src="../_assets/img/album-hc.jpg">
+                            <h3>Warning</h3>
+                            <p>Hot Chip</p>
+                            </a>
+                            <a href="index.html" data-rel="dialog" data-transition="slideup">Purchase album </a>
+                        </li>
+                        <li><a href="index.html" data-transition="pop">
+                            <img src="../_assets/img/album-p.jpg">
+                            <h3>Wolfgang Amadeus Phoenix</h3>
+                            <p>Phoenix</p>
+                            </a>
+                            <a href="index.html" data-rel="dialog" data-transition="slideup">Purchase album </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="my-page" data-role="collapsible" data-transition="slidedown" data-theme="b">
+                    <h1 > This a test again.</h1>
+                    <ul data-theme="b" data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                        <li class="ui-li-has-thumb ui-first-child"><a href="./uuuu" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>iOS 6.1</h2>
+                            <p>Apple released iOS 6.1</p>
+                            <p class="ui-li-aside">iOS</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>BlackBerry 10</h2>
+                            <p>BlackBerry launched the Z10 and Q10 with the new BB10 OS</p>
+                            <p class="ui-li-aside">BlackBerry</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>WP 7.8</h2>
+                            <p>Nokia rolls out WP 7.8 to Lumia 800</p>
+                            <p class="ui-li-aside">Windows Phone</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Galaxy</h2>
+                            <p>New Samsung Galaxy Express</p>
+                            <p class="ui-li-aside">Samsung</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Nexus 7</h2>
+                            <p>Rumours about new full HD Nexus 7</p>
+                            <p class="ui-li-aside">Android</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Firefox OS</h2>
+                            <p>ZTE to launch Firefox OS smartphone at MWC</p>
+                            <p class="ui-li-aside">Firefox</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Tizen</h2>
+                            <p>First Samsung phones with Tizen can be expected in 2013</p>
+                            <p class="ui-li-aside">Tizen</p>
+                        </a></li>
+                        <li class="ui-last-child"><a href="./index.html" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <h2>Symbian</h2>
+                            <p>Nokia confirms the end of Symbian</p>
+                            <p class="ui-li-aside">Symbian</p>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+	</div>  <!-- Content -->
+    <div data-role="footer" data-position="fixed"> 
+    <h1> This is Footer text.</h1></div>
+</div><!-- /page -->
+    
+
+    
+    
+	<!-- Start of registration page -->
+<div data-role="page"  id="registration" data-theme="{{App.currtheme}}">
+
+    
+	<div data-role="header">
+		<h1>Page Title</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Delete</a>
+	</div>
+    
+	<div data-role='content' >
+        <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend > Select your theam.</legend>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" ng-model="App.currtheme" value="a" >
+            <label for="radio-choice-h-2a">Silver White</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" ng-model="App.currtheme" value="b" >
+            <label for="radio-choice-h-2b">Dark</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" ng-model="App.currtheme" value="c" checked>
+            <label for="radio-choice-h-2c">Vorteil-1</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2d" ng-model="App.currtheme" value="d" >
+            <label for="radio-choice-h-2d">Vorteil-2</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2e" ng-model="App.currtheme" value="e" >
+            <label for="radio-choice-h-2e">Vorteil-3</label>
+            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2f" ng-model="App.currtheme" value="f" >
+            <label for="radio-choice-h-2f">Pink</label>
+        </fieldset>
+        
+        
+
+        <div class="ui-corner-all custom-corners">
+          <div class="ui-bar ">
+            <h3>Dummy Controls below.</h3>
+          </div>
+
+            <div data-role="collapsibleset" data-theme="a" data-content-theme="b">
+                <div data-role="collapsible">
+                    <h2>Notches</h2>
+                    <ul data-role="listview" data-filter="true" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">Single U Notch (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Single U Notch (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Two U Notch (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Two U Notch (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Two U Notch (Out of plane Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">V Notch (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Multiple U Notch (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                    </ul>
+                </div>
+                
+                <div data-role="collapsible">
+                    <h2>Fillets</h2>
+                    <ul data-role="listview" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">Square Shoulder Fillet (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Square Shoulder Fillet (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        
+                    </ul>
+                </div>
+                <div data-role="collapsible">
+                    <h2>Holes</h2>
+                    <ul data-role="listview" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">Central Hole (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Central Hole (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Central Hole (Out of plane Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Off Centre Hole (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Off Centre Hole (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Rectangular Hole (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Infinite Row of Holes (Parallel Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Infinite Row of Holes (Normal Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                    </ul>
+                </div>
+                <div data-role="collapsible">
+                    <h2>Shafts</h2>
+                    <ul data-role="listview" data-filter-theme="a" data-divider-theme="b">
+                        <li><a href="index.html">U Notch Circular Shaft (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">U Notch Circular Shaft (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">U Notch Circular Shaft (Torsion)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Stepped Circular Shaft (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Stepped Circular Shaft (Bending)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Stepped Circular Shaft (Torsion)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Radial Hole Circular Shaft (Tension)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                        <li><a href="#BandingShaft">
+                            
+                            <img src="./imges/TestImg.PNG">
+                            <h3>Radial Hole Circular Shaft (Bending)</h3>
+                            <p>Calculate stress concentration factor in the shoulder of a circular section of shaft subjected to bending loads.</p>
+                            <p class="ui-li-aside"><strong>Ready</strong></p>
+                            </a></li>
+                        <li><a href="index.html">Radial Hole Circular Shaft (Torsion)
+                            <p class="ui-li-aside"><strong>Not Ready</strong></p>
+                            </a></li>
+                    </ul>
+                </div>
+                
+                <div data-role="collapsible">
+                    <h2>Formatted text</h2>
+                    <ul data-role="listview" data-theme="a" data-divider-theme="b">
+                        <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+                        <li><a href="index.html">
+                            <h3>Stephen Weber</h3>
+                            <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                            <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+                            </a></li>
+                        <li><a href="index.html">
+                            <h3>jQuery Team</h3>
+                            <p><strong>Boston Conference Planning</strong></p>
+                            <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                            <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div data-role="collapsible" data-transition="slidedown">
+                    <h2>Thumbnails and split button</h2>
+                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a">
+                        <li><a href="index.html">
+                                <img src="../_assets/img/album-bb.jpg">
+                                <h3>Broken Bells</h3>
+                                <p>Broken Bells</p>
+                            </a>
+                            <a href="index.html" data-rel="dialog" data-transition="slideup">Purchase album </a>
+                        </li>
+                        <li><a href="index.html">
+                            <img src="../_assets/img/album-hc.jpg">
+                            <h3>Warning</h3>
+                            <p>Hot Chip</p>
+                            </a>
+                            <a href="index.html" data-rel="dialog" data-transition="slideup">Purchase album </a>
+                        </li>
+                        <li><a href="index.html" data-transition="pop">
+                            <img src="../_assets/img/album-p.jpg">
+                            <h3>Wolfgang Amadeus Phoenix</h3>
+                            <p>Phoenix</p>
+                            </a>
+                            <a href="index.html" data-rel="dialog" data-transition="slideup">Purchase album </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="my-page" data-role="collapsible" data-transition="slidedown" theme="b">
+                    <h1 > This a test again.</h1>
+                    <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                        <li class="ui-li-has-thumb ui-first-child"><a href="./uuuu" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>iOS 6.1</h2>
+                            <p>Apple released iOS 6.1</p>
+                            <p class="ui-li-aside">iOS</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>BlackBerry 10</h2>
+                            <p>BlackBerry launched the Z10 and Q10 with the new BB10 OS</p>
+                            <p class="ui-li-aside">BlackBerry</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>WP 7.8</h2>
+                            <p>Nokia rolls out WP 7.8 to Lumia 800</p>
+                            <p class="ui-li-aside">Windows Phone</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Galaxy</h2>
+                            <p>New Samsung Galaxy Express</p>
+                            <p class="ui-li-aside">Samsung</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Nexus 7</h2>
+                            <p>Rumours about new full HD Nexus 7</p>
+                            <p class="ui-li-aside">Android</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Firefox OS</h2>
+                            <p>ZTE to launch Firefox OS smartphone at MWC</p>
+                            <p class="ui-li-aside">Firefox</p>
+                        </a></li>
+                        <li class="ui-li-has-thumb"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <img src="./imges/Img.png" class="ui-li-thumb">
+                            <h2>Tizen</h2>
+                            <p>First Samsung phones with Tizen can be expected in 2013</p>
+                            <p class="ui-li-aside">Tizen</p>
+                        </a></li>
+                        <li class="ui-last-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                            <h2>Symbian</h2>
+                            <p>Nokia confirms the end of Symbian</p>
+                            <p class="ui-li-aside">Symbian</p>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+	</div>  <!-- Content -->
+</div><!-- /page -->
+    
+
+<div data-role="page" id="BandingShaft" data-theme="{{App.currtheme}}">
+	<div data-role="header">
+		<h1>Page Title</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Delete</a>
+	</div>
+    
+	<div data-role='content' >
+        
+        <div > 
+            <img class="main-img" src="./imges/TestImg.PNG"> 
+        </div>
+
+        <div class="ui-corner-all custom-corners">
+          <div class="ui-bar ui-bar-b">
+            <h3>Required Inputs</h3>
+          </div>
+          <div class="ui-body ui-body-e my-animation">
+
+              <div data-role="controlgroup" > 
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button >M: </button>
+                    <input type="text" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                    <select mini name="select-more-1a" id="select-more-1a" >
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                    </select>
+                </fieldset>
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button >D: </button>
+                    <input type="text" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                    <select mini name="select-more-1a" id="select-more-1a" >
+                        <option value="">Select</option>
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                    </select>
+                </fieldset>
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button >d: </button>
+                    <label for="text-basic">Text input:</label>
+                    <input type="text" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                    <label for="select-more-1a" class="ui-hidden-accessible">More</label>
+                    <select mini name="select-more-1a" id="select-more-1a" >
+                        <option value="">Select</option>
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                    </select>
+                </fieldset>
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button >r: </button>
+                    <label for="text-basic">Text input:</label>
+                    <input type="text" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                    <label for="select-more-1a" class="ui-hidden-accessible">More</label>
+                    <select mini name="select-more-1a" id="select-more-1a" >
+                        <option value="">Select</option>
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                    </select>
+                </fieldset>
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button >t: </button>
+                    <label for="text-basic">Text input:</label>
+                    <input type="text" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                    <label for="select-more-1a" class="ui-hidden-accessible">More</label>
+                    <select mini name="select-more-1a" id="select-more-1a" >
+                        <option value="">Select</option>
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                    </select>
+                </fieldset>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ui-corner-all custom-corners">
+              <div class="ui-bar ui-bar-b">
+                <h3>outputs </h3>
+              </div>
+              <div class="ui-body ui-body-e my-animation">
+
+              <div data-role="controlgroup" > 
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button >Sigma Nominal </button>
+                    <button> {{10Mpa}}</button>
+                </fieldset>
+
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <button  class="ui-bar ui-bar-b">Peak Stress </button>
+                    <button class="ui-bar ui-bar-b"> {{10Mpa}}</button>
+                </fieldset>
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-btn-b">Peak Stress</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-btn-b">{{10Mpa}}</a>
+                    </div>
+               
+            </div>
+          </div>
+        </div>
+	</div>  <!-- Content -->
+    
+    
+    <div data-role="footer" data-position="fixed">
+        <h1>
+            <a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-mail  ui-btn-icon-notext">Delete</a>
+            <a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-comment  ui-btn-icon-notext">Delete</a>
+            <a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-star  ui-btn-icon-notext">Delete</a>
+        </h1>
+    </div>
+</div><!-- /page -->
+</body>
+</html>
