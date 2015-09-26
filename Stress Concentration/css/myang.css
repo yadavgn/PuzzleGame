@@ -25,6 +25,60 @@
     border-color: aquamarine;
 }
 
+
+#main-img {
+    align-self: center;
+    align-content: center;
+    border: 2px;
+    border-color: aquamarine;
+}
+
+
+#myimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 12px;
+    border-color: aquamarine;
+    margin-bottom: 10px;
+}
+
+.fieldset{
+    min-width: 300px;
+}
+
+.custom-corners{
+    margin: 5px;
+}
+
+
+.eng-text,
+.eng-text-output{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: double;
+    padding: 3px;
+    background-color: transparent;
+    width: 40%;
+    color: black;
+    align-items: right;
+}
+
+.eng-text-output {
+    display: inline-block;
+}
+.eng-select {
+    background-color: royalblue;
+    color: white;
+}
+.eng-label {
+    color: blue;
+    font-weight: bold;
+    padding: 5px;
+    width: 100px;
+}
+
 /*==========================================================================*/
 /* below code is to have text box within same line with unit selector */ 
 .controlgroup-textinput{
