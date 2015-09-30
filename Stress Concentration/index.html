@@ -22,10 +22,8 @@
      
 </head>
 <body  ng-controller="MainController as App" >
-   
-    
-    
-	<!-- This Page is working fine. -->
+
+    <!-- This Page is working fine. -->
 <div data-role="page" id="registration" data-theme="{{App.currtheme}}">
 
     
@@ -38,17 +36,17 @@
         <fieldset data-role="controlgroup" data-type="horizontal">
             <legend > Select your theam.</legend>
             <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" ng-model="App.currtheme" value="a" >
-            <label for="radio-choice-h-2a">Silver White</label>
+            <label for="radio-choice-h-2a">S</label>
             <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" ng-model="App.currtheme" value="b" >
-            <label for="radio-choice-h-2b">Dark</label>
+            <label for="radio-choice-h-2b">D</label>
             <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" ng-model="App.currtheme" value="c" checked>
-            <label for="radio-choice-h-2c">Vorteil-1</label>
+            <label for="radio-choice-h-2c">V1</label>
             <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2d" ng-model="App.currtheme" value="d" >
-            <label for="radio-choice-h-2d">Vorteil-2</label>
+            <label for="radio-choice-h-2d">V2</label>
             <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2e" ng-model="App.currtheme" value="e" >
-            <label for="radio-choice-h-2e">Vorteil-3</label>
+            <label for="radio-choice-h-2e">V3</label>
             <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2f" ng-model="App.currtheme" value="f" >
-            <label for="radio-choice-h-2f">Pink</label>
+            <label for="radio-choice-h-2f">P</label>
         </fieldset>
         
 <!--   Your code goes here -> -->
@@ -97,7 +95,7 @@
     </div>
        
     <div >
-      <div class="ui-bar ui-bar-e">
+      <div class="ui-bar ui-bar-f">
         <h3>Inputs</h3>
       </div>
       <div class="ui-body-e">
@@ -183,15 +181,15 @@
         
     <fieldset class="ui-grid-a">
         <div class="ui-block-a">
-            <a href="#" ng-click="App.BandingShaft.Calculate()" data-theme="d" data-role="button">Calculate</a>
+            <a href="#" ng-click="App.BandingShaft.Calculate()" data-role="button">Calculate</a>
         </div>
         <div class="ui-block-b">
-            <a href="#" ng-click="App.BandingShaft.Calculate()" data-theme="d" data-role="button">Reset</a>
+            <a href="#" ng-click="App.BandingShaft.Reset()"  data-role="button">Reset</a>
         </div>
     </fieldset>
         
     <div class="ui-corner-all custom-corners">
-      <div class="ui-bar ui-bar-e">
+      <div class="ui-bar ui-bar-f">
           <h3>Outputs</h3>
       </div>
       <div class="ui-body ui-body-e">

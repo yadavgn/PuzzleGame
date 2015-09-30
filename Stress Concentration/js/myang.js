@@ -156,7 +156,7 @@ BandingShaft = function()
 MyApp = function($scope,$http) {
     var app = this;
     
-    app.currtheme = 'c'; 
+    app.currtheme = 'f'; 
 
     app.Holes = new Array();
     
