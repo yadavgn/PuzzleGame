@@ -220,8 +220,146 @@
     </div>
 </div><!-- /page -->
     
+<div data-role="page" id="BendingShaft" data-theme="{{App.currtheme}}">
+	<div data-role="header">
+		<h1>Page Title</h1>
+		<a href="" id='exitApp' class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Delete</a>
+	</div>
     
-    
+	<div data-role='content' ng-modle="App.SC.BendingShart" >
 
+<!--   Your code goes here -> -->
+    <div id="input-group" class="input-group" >
+        <img id="myimg" class ="myimg" src="./imges/TestImg.PNG" />    
+        <p>Calculate stress concentration factor in the shoulder of a circular section of shaft subjected to bending loads.</p>
+    </div>
+       
+    <div >
+      <div class="ui-bar ui-bar-f">
+        <h3>Inputs</h3>
+      </div>
+      <div class="ui-body-e">
+
+        <div ng-model="App.BandingShaft"> 
+            
+            <fieldset data-role="controlgroup" data-type="horizontal" >
+                <text class="eng-label" data-role="none" >{{App.BandingShaft._M.displayName}}: </text>
+                <input ng-change="App.BandingShaft._M.value()" data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._M.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                <select class="eng-select" ng-model="App.BandingShaft._M.displayUnit" data-role="none" >
+                    <option value="Nmm">Nmm</option>
+                </select>
+            </fieldset>
+
+            <fieldset data-role="controlgroup" data-type="horizontal" >
+                <text class="eng-label" data-role="none" >{{App.BandingShaft._D.displayName}}: </text>
+                <input ng-change="App.BandingShaft._D.value()" data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._D.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                <select class="eng-select" ng-model="App.BandingShaft._D.displayUnit" data-role="none" >
+                    <option value="mm">Milli Meter (mm)</option>
+                    <option value="cm">Centi Meter (cm)</option>
+                    <option value="m">Meter (m)</option>
+                    <option value="in">inch (in)</option>
+                    <option value="ft">foot (ft)</option>
+                    <option value="yd">yard (yd)</option>
+                </select>
+
+            </fieldset>
+
+            <fieldset data-role="controlgroup" data-type="horizontal" >
+                <text class="eng-label" data-role="none" >{{App.BandingShaft._d.displayName}}: </text>
+                <input ng-change="App.BandingShaft._d.value()" data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._d.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                <select class="eng-select" ng-model="App.BandingShaft._d.displayUnit" data-role="none" >
+                    <option value="mm" selected>Milli Meter (mm)</option>
+                    <option value="cm">Centi Meter (cm)</option>
+                    <option value="m">Meter (m)</option>
+                    <option value="in">inch (in)</option>
+                    <option value="ft">foot (ft)</option>
+                    <option value="yd">yard (yd)</option>
+                </select>
+
+            </fieldset>
+            
+            <fieldset data-role="controlgroup" data-type="horizontal" >
+                <text class="eng-label" data-role="none" >{{App.BandingShaft._r.displayName}}: </text>
+                <input ng-change="App.BandingShaft._r.value()" data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._r.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                <select class="eng-select" ng-model="App.BandingShaft._r.displayUnit" data-role="none" >
+                    <option value="mm" selected>Milli Meter (mm)</option>
+                    <option value="cm">Centi Meter (cm)</option>
+                    <option value="m">Meter (m)</option>
+                    <option value="in">inch (in)</option>
+                    <option value="ft">foot (ft)</option>
+                    <option value="yd">yard (yd)</option>
+                </select>
+
+            </fieldset>
+            <fieldset data-role="controlgroup" data-type="horizontal" >
+                <text class="eng-label" data-role="none" >{{App.BandingShaft._t.displayName}}: </text>
+                <input  ng-change="App.BandingShaft._t.value()" data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._t.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+                <select class="eng-select" ng-model="App.BandingShaft._t.displayUnit" data-role="none" >
+                    <option value="mm" selected>Milli Meter (mm)</option>
+                    <option value="cm">Centi Meter (cm)</option>
+                    <option value="m">Meter (m)</option>
+                    <option value="in">inch (in)</option>
+                    <option value="ft">foot (ft)</option>
+                    <option value="yd">yard (yd)</option>
+                </select>
+            </fieldset>
+            <!-- <div >
+                <div> t/r: {{App.BandingShaft._t_by_r()}}</div>
+                <div> A1: {{App.BandingShaft.A1()}}</div>
+                <div> 2t/D: {{App.BandingShaft.t2_by_D()}}</div>
+                <div> Kt: {{App.BandingShaft.Kt()}}</div>
+                <div> Sigma Nominal {{App.BandingShaft.SigmaNominal()}}</div>
+                <div> Peak Stress: {{App.BandingShaft.PeakStress()}}</div>
+            </div> 
+-->
+        </div>
+
+
+     </div>
+    </div>
+        
+        
+    <fieldset class="ui-grid-a">
+        <div class="ui-block-a">
+            <a href="#" ng-click="App.BandingShaft.Calculate()" data-role="button">Calculate</a>
+        </div>
+        <div class="ui-block-b">
+            <a href="#" ng-click="App.BandingShaft.Reset()"  data-role="button">Reset</a>
+        </div>
+    </fieldset>
+        
+    <div class="ui-corner-all custom-corners">
+      <div class="ui-bar ui-bar-f">
+          <h3>Outputs</h3>
+      </div>
+      <div class="ui-body ui-body-e">
+        
+          
+    <fieldset data-role="controlgroup" data-type="horizontal" >
+            <text class="eng-label" data-role="none" >{{App.BandingShaft._PeakStress.displayName}}: </text>
+            <input disabled  ng-value="App.BandingShaft._PeakStress.val" data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._PeakStress.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+            <text ng-model="App.BandingShaft._t.displayUnit" data-role="none" >
+                Mpa
+            </text>
+    </fieldset>
+
+          
+    <fieldset data-role="controlgroup" data-type="horizontal" >
+            <text class="eng-label" data-role="none" >{{App.BandingShaft._SigmaNominal.displayName}}: </text>
+            <input disabled   data-role="none" class="eng-text" type="number" ng-model="App.BandingShaft._SigmaNominal.val" name="text-basic" id="text-basic" data-wrapper-class="controlgroup-textinput ui-btn" placeholder ="enter value">
+            <text ng-model="App.BandingShaft._t.displayUnit" data-role="none" >
+                Mpa
+            </text>
+    </fieldset>
+
+          
+      </div>
+    </div>
+<!--   Your code goes here -> -->
+   
+    </div>
+</div><!-- /page -->
+    
+    
 </body>
 </html>
